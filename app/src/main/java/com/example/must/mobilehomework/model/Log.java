@@ -1,16 +1,18 @@
 package com.example.must.mobilehomework.model;
 
+import java.io.Serializable;
+
 /**
  * Created by must on 01.05.2016.
  */
-public class Log {
+public class Log implements Serializable {
     private String pickupCity;
     private String dropoffCity;
-    private User user;
-    private Car car;
+    private String userName;
+    private int carId;
     private RentDate date;
 
-    public Log(){
+    public Log() {
         //dosyaya aynen yazdır
     }
 
@@ -38,20 +40,20 @@ public class Log {
         this.pickupCity = pickupCity;
     }
 
-    public Car getCar() {
-        return car;
+    public int getCarId() {
+        return carId;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public void setCarId(int carId) {
+        this.carId = carId;
     }
 
-    public User getUser() {
-        return user;
+    public String getUser() {
+        return userName;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(String userName) {
+        this.userName = userName;
     }
 
 }

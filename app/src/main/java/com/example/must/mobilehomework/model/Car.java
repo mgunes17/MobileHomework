@@ -11,9 +11,11 @@ public class Car implements Serializable{
     private String model;
     private String locationCity;
     private String type;
+    private int price;
 
     public Car(){
         id = ++TOTAL;
+        price = (id * 10) % 7;
     }
 
     public Car(int id, String model, String city, String type){
@@ -21,6 +23,15 @@ public class Car implements Serializable{
         this.model = model;
         this.locationCity = city;
         this.type = type;
+        price = (id * 10) % 7;
+    }
+
+    public void setPrice(int price){
+        this.price = price;
+    }
+
+    public int getPrice(){
+        return price;
     }
 
     public int getId(){

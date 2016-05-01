@@ -30,13 +30,6 @@ public class RentActivity extends AppCompatActivity {
     private Spinner spnDropoffDay;
     private Spinner spnCarType;
     private Button btnSelect;
-    private String pickupCity;
-    private String dropoffCity;
-    private String pickupMonth;
-    private int pickupDay;
-    private String dropoffMonth;
-    private int dropoffDay;
-    private String carType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +37,6 @@ public class RentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rent);
         initialize();
         clickButton();
-
-
 
     }
 
@@ -66,6 +57,7 @@ public class RentActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("RentSelection", rs);
                 Intent intent = new Intent(RentActivity.this, CarSelectActivity.class);
+                intent.putExtra("userName", getIntent().getStringExtra("userName"));
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

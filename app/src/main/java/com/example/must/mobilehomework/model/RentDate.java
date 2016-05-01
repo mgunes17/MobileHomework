@@ -7,6 +7,7 @@ public class RentDate {
     private String pickupMonth;
     private int pickupDay;
     private String dropoffMonth;
+    private int dropoffDay;
 
     public RentDate(){
 
@@ -44,5 +45,4 @@ public class RentDate {
         this.pickupMonth = pickupMonth;
     }
 
-    private int dropoffDay;
 }

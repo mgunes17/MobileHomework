@@ -34,12 +34,13 @@ public class CarAdapter extends BaseAdapter{
         TextView carModel = (TextView) satirView.findViewById(R.id.rowCarModel);
         TextView carType = (TextView) satirView.findViewById(R.id.rowCarType);
         TextView carLocation = (TextView) satirView.findViewById(R.id.rowCarLocation);
+        TextView carPrice = (TextView) satirView.findViewById(R.id.rowCarPrice);
 
         Car car = carList.get(position);
         carModel.setText("  "+car.getModel());
         carType.setText("  "+car.getType());
         carLocation.setText("  "+car.getLocationCity());
-
+        carPrice.setText(" "+car.getPrice());
 
 
         if(car.getType().contains("Ekonomik")){

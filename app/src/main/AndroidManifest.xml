@@ -40,6 +40,8 @@
         </activity>
         <activity android:name=".admin.CarListActivity" >
         </activity>
+        <activity android:name=".LogDetailActivity" >
+        </activity>
     </application>
 
 </manifest>

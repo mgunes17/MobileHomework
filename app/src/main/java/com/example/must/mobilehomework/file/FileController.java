@@ -6,6 +6,10 @@ import android.widget.Toast;
 
 import com.example.must.mobilehomework.SignUpActivity;
 import com.example.must.mobilehomework.model.Car;
+import com.example.must.mobilehomework.model.DateSelection;
+import com.example.must.mobilehomework.model.Log;
+import com.example.must.mobilehomework.model.RentDate;
+import com.example.must.mobilehomework.model.RentSelection;
 import com.example.must.mobilehomework.model.User;
 
 import java.io.BufferedReader;
@@ -24,6 +28,124 @@ import java.util.List;
 public class FileController {
     private final static String USER_FILE_NAME = "users.txt";
     private final static String CAR_FILE_NAME = "cars.txt";
+    private final static String LOG_FILE_NAME = "logs.txt";
+
+    public List<Car> getFreeCars(Context c, RentSelection rt){
+
+        //Tüm arabaları çekip tarihi ve şehri uygun olanları döndür
+        List<Car> carList = getAllCars(c);
+        List<Car> returnList = new ArrayList<>();
+
+        //Log listesinde o arabaya ait kayıt varsa seçemesin
+        for(int i=0; i<carList.size(); i++){
+            //eğer şehir doğruysa ve log kaydı yoksa ve istenen tipteyse
+            if(isLogExist(carList.get(i).getId(), c) == false) {
+                if(carList.get(i).getLocationCity().contains(rt.getPickupCity())){
+                    if(carList.get(i).getType().equalsIgnoreCase(rt.getCarType())){
+                        returnList.add(carList.get(i));
+                    }
+
+                }
+            }
+
+        }
+
+        return returnList;
+    }
+
+    //o idye ait arabanın log kaydı var mı
+    public boolean isLogExist(int id, Context context){
+        String line;
+        String [] split;
+
+        try{
+            InputStream inputStream = context.openFileInput(LOG_FILE_NAME);
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                while ((line = bufferedReader.readLine()) != null ) {
+                    split = line.split(" ");
+                    if(id == Integer.parseInt(split[0])){
+                       return true;
+                    }
+                }
+
+                inputStream.close();
+            }
+        }
+        catch(FileNotFoundException nfe){
+            Toast.makeText(context, "logs.txt Dosya Bulunamadı", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        catch (IOException io){
+            Toast.makeText(context, "logs.txt Okuma hatası", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return false;
+    }
+
+    //Verilen car id yi içeren kayıtları getir
+    public List<Log> getCarLogList(int id, Context context){
+        List<Log> logList = new ArrayList<>();
+        String line;
+        String [] split;
+
+        try{
+            InputStream inputStream = context.openFileInput(CAR_FILE_NAME);
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                while ((line = bufferedReader.readLine()) != null ) {
+                    split = line.split(" ");
+                    if(id == Integer.parseInt(split[0])){
+                        Log log = new Log();
+                        logList.add(log);
+                    }
+                }
+
+                inputStream.close();
+            }
+        }
+        catch(FileNotFoundException nfe){
+            Toast.makeText(context, "logs.txt Dosya Bulunamadı", Toast.LENGTH_SHORT).show();
+        }
+        catch (IOException io){
+            Toast.makeText(context, "logs.txt Okuma hatası", Toast.LENGTH_SHORT).show();
+        }
+
+        return logList;
+    }
+
+    //Kiralama kaydını dosyaya yazdır
+    public boolean saveLog(Log log, Context context){
+        try{
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
+                    context.openFileOutput(LOG_FILE_NAME, Context.MODE_APPEND));
+
+            outputStreamWriter.write(log.getCarId()+" "); //arabanın idsi
+            outputStreamWriter.write(log.getUser()+" "); //kiralayan kullanıcı
+            outputStreamWriter.write(log.getPickupCity()+" "); //arabayı aldığı şehir
+            outputStreamWriter.write(log.getDropoffCity()+" ");//arabayı bırakacağı yer
+            outputStreamWriter.write(log.getDate().getPickupMonth()+" "); //aldığı ay
+            outputStreamWriter.write(log.getDate().getPickupDay()+" ");//aldığı gün
+            outputStreamWriter.write(log.getDate().getDropoffDay()+" "); //bırakacağı ay
+            outputStreamWriter.write(log.getDate().getDropoffDay()+" ");//bırakacağı gün
+            outputStreamWriter.write("\n");
+            outputStreamWriter.flush();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Log Kaydında Bir hata meydana geldi", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+    }
 
     public List<Car> getAllCars(Context context){
         List<Car> carList = new ArrayList<>();
@@ -62,10 +184,11 @@ public class FileController {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
                     context.openFileOutput(CAR_FILE_NAME, Context.MODE_APPEND));
 
-            outputStreamWriter.write(car.getId()+" ");
+            outputStreamWriter.write(String.valueOf(car.getId())+" ");
             outputStreamWriter.write(car.getModel()+" ");
             outputStreamWriter.write(car.getLocationCity()+" ");
-            outputStreamWriter.write(car.getType());
+            outputStreamWriter.write(car.getType()+" ");
+            outputStreamWriter.write(String.valueOf(car.getPrice())+" ");
             outputStreamWriter.write("\n");
             outputStreamWriter.flush();
         }
