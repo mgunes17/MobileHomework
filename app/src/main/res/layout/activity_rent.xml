@@ -23,7 +23,7 @@
 
     <Spinner
         android:id="@+id/spnPickup"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:prompt="@string/pickup"/>
 
@@ -36,7 +36,7 @@
 
     <Spinner
         android:id="@+id/spnDropoff"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:prompt="@string/dropoff"/>
 
@@ -54,12 +54,12 @@
 
         <Spinner
             android:id="@+id/spnPickupMonth"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <Spinner
             android:id="@+id/spnPickupDay"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
@@ -78,12 +78,12 @@
 
         <Spinner
             android:id="@+id/spnDropoffMonth"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <Spinner
             android:id="@+id/spnDropoffDay"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
@@ -97,7 +97,7 @@
 
     <Spinner
         android:id="@+id/spnCarType"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Button

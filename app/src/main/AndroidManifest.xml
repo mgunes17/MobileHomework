@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ekonomik"
         android:label="Araba Kirala"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
@@ -35,6 +35,10 @@
         <activity android:name=".admin.LogListActivity" >
         </activity>
         <activity android:name=".admin.UserListActivity" >
+        </activity>
+        <activity android:name=".CarSelectActivity" >
+        </activity>
+        <activity android:name=".admin.CarListActivity" >
         </activity>
     </application>
 

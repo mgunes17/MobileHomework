@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.must.mobilehomework.admin.AdminMainActivity;
 import com.example.must.mobilehomework.file.LoginController;
 import com.example.must.mobilehomework.model.User;
 
@@ -43,9 +44,18 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Parola yanlış", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        intent = new Intent(LoginActivity.this, UserMainActivity.class);
-                        intent.putExtra("userName", loginUserName);
-                        startActivity(intent);
+                        //sistem yöneticisinin anasayfası farklı
+                        if(user.getUserName().contains("admin")){
+                            intent = new Intent(LoginActivity.this, AdminMainActivity.class);
+                            intent.putExtra("userName", loginUserName);
+                            startActivity(intent);
+                        }
+                        else{
+                            intent = new Intent(LoginActivity.this, UserMainActivity.class);
+                            intent.putExtra("userName", loginUserName);
+                            startActivity(intent);
+                        }
+
                     }
                 }
             }

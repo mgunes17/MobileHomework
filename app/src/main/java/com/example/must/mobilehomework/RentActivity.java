@@ -14,6 +14,8 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import com.example.must.mobilehomework.model.CarTypeList;
 import com.example.must.mobilehomework.model.CityList;
 import com.example.must.mobilehomework.model.DateSelection;
+import com.example.must.mobilehomework.model.Log;
+import com.example.must.mobilehomework.model.RentSelection;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,33 +50,27 @@ public class RentActivity extends AppCompatActivity {
     }
 
     private void clickButton(){
-       /* btnSelect.setOnClickListener(new View.OnClickListener(){
+       btnSelect.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //pickupCity = String.valueOf(spnPickup.getSelectedItem().toString());
-               /* dropoffCity = String.valueOf(spnDropoff.getSelectedItem().toString());
-                pickupMonth = String.valueOf(spnPickupMonth.getSelectedItem().toString());
-                pickupDay =  Integer.parseInt(spnPickupDay.getSelectedItem().toString());
-                dropoffMonth = String.valueOf(spnDropoffMonth.getSelectedItem().toString());
-                dropoffDay =  Integer.parseInt(spnDropoffDay.getSelectedItem().toString());
-                carType = String.valueOf(spnCarType.getSelectedItem().toString());
+                RentSelection rs = new RentSelection();
+                rs.setPickupMonth(spnPickupMonth.getSelectedItem().toString());
+                rs.setPickupDay(Integer.parseInt(spnPickupDay.getSelectedItem().toString()));
+                rs.setDropoffMonth(spnDropoffMonth.getSelectedItem().toString());
+                rs.setDropoffDay(Integer.parseInt(spnDropoffDay.getSelectedItem().toString()));
+                rs.setPickupCity(spnPickup.getSelectedItem().toString());
+                rs.setDropoffCity(spnDropoff.getSelectedItem().toString());
+                rs.setCarType(String.valueOf(spnCarType.getSelectedItem().toString()));
 
                 // tarih kontrolü - teslim almadan önce olamaz
-                //Yeni log oluştur !
-               Intent i = new Intent(RentActivity.this, UserMainActivity.class);
-                startActivity(i);
-            }
-        });*/
-
-        btnSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pickupCity = String.valueOf(spnPickup.getSelectedItem().toString());
-                Intent intent = new Intent(RentActivity.this, LoginActivity.class);
-
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("RentSelection", rs);
+                Intent intent = new Intent(RentActivity.this, CarSelectActivity.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
+
     }
 
     private void initialize(){

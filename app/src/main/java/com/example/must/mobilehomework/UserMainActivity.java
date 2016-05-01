@@ -3,6 +3,7 @@ package com.example.must.mobilehomework;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -31,7 +32,7 @@ public class UserMainActivity extends AppCompatActivity {
     private void initialize(){
         btnRent = (Button)findViewById(R.id.btnRent);
         btnLogs = (Button)findViewById(R.id.btnLogs);
-        btnLogs = (Button)findViewById(R.id.btnExit);
+        btnExit = (Button)findViewById(R.id.btnExit);
         txtUserMainTitle = (TextView)findViewById(R.id.txtUserMainTitle);
         intent = getIntent();
         userName = intent.getStringExtra("userName");
@@ -50,5 +51,27 @@ public class UserMainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
     }
+
+    /*
+    //login olduktan sonra back butonunun çalışmaması için
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // your code
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }*/
 }
